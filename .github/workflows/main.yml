@@ -1,0 +1,51 @@
+name: Run tests on Ubuntu, Windows and Macos
+on:
+  pull_request:
+    branches: ["main"]
+  push:
+    branches: ["main"]
+    
+jobs:
+  test-ubuntu:
+    name: Test Ubuntu
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.16
+
+      - name: Running Unit Tests
+        run: go test -v ./...
+
+  test-windows:
+    name: Test Windows
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.16
+
+      - name: Running Unit Tests
+        run: go test -v  ./...
+
+  test-macos:
+    name: Test MacOs
+    runs-on: macos-latest
+
+    steps:
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.16
+
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Running Unit Tests
+        run: go test -v  ./...
